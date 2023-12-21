@@ -1,6 +1,8 @@
 const inputElement = document.querySelector("#search-1");
 const submitBtn = document.querySelector("#submit-search-1");
 const resultsElement = document.querySelector("section");
+const todayWeather = document.querySelector('#result-1');
+console.log(todayWeather);
 let searchCity = null
 let lat = null;
 let lon = null;
@@ -8,7 +10,35 @@ let lon = null;
 let apiKey = "81de0a25e101e669923b3eb2ce22b22e";
 let apiURL = "https://";
 
-function getCurrentWeather(params) {
+function getCurrentWeather(lat, lon) {
+  let currentWeather = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+    // now let's make the fetch request
+    fetch(currentWeather).then( response => {
+      // let's just console .log it for now
+      console.log('Results are ', response);
+      // extract the information I want from the body
+      return response.json();
+    }).then( currentWeatherData => {
+      // console log it again
+      console.log(currentWeatherData);
+      var card = document.createElement("div");
+      var heading = document.createElement("h2");
+      var weatherImg = document.createElement("img");
+      var tempPar=document.createElement("p");
+      var windSpeed=document.createElement("p");
+      var humidity=document.createElement("p");
+      var teperature=currentWeatherData.main.temp;
+      var windDisplay=currentWeatherData.wind;
+      var humidityDisplay=currentWeatherData.main.humidity;
+      var cityName=currentWeatherData.name;
+      console.log(cityName);
+      var date=new Date();
+      console.log(date);
+      heading.textContent= cityName;
+      todayWeather.appendChild(heading);
+      // assign the values from your geocode data to your lat and long variables that were declared up top
+      // and pass those variables into your next api call.
+    })
   console.log("Get Current Weather");
 }
 
@@ -46,7 +76,9 @@ submitBtn.addEventListener("click", (event) => {
       // console log it again
       console.log(myGecodeData);
       lat = myGecodeData[0]["lat"];
+      lon = myGecodeData[0]["lon"];
       console.log('lat value is ', lat);
+      getCurrentWeather(lat, lon)
       // assign the values from your geocode data to your lat and long variables that were declared up top
       // and pass those variables into your next api call.
     })
