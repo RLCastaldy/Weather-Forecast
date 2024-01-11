@@ -11,7 +11,7 @@ let apiKey = "81de0a25e101e669923b3eb2ce22b22e";
 let apiURL = "https://";
 
 function getCurrentWeather(lat, lon) {
-  let currentWeather = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+  let currentWeather = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`;
     // now let's make the fetch request
     fetch(currentWeather).then( response => {
       // let's just console .log it for now
@@ -20,27 +20,52 @@ function getCurrentWeather(lat, lon) {
       return response.json();
     }).then( currentWeatherData => {
       // console log it again
-      console.log(currentWeatherData);
-      var card = document.createElement("div");
+      console.log("DATA", currentWeatherData);
+      fiveDayWeatherForecast(currentWeatherData.list);
+
+
+      var card = document.createElement("div"); 
+        card.setAttribute("class", "card");
+
       var heading = document.createElement("h2");
       var weatherImg = document.createElement("img");
       var tempPar=document.createElement("p");
       var windSpeed=document.createElement("p");
       var humidity=document.createElement("p");
-      var teperature=currentWeatherData.main.temp;
-      var windDisplay=currentWeatherData.wind;
-      var humidityDisplay=currentWeatherData.main.humidity;
-      var cityName=currentWeatherData.name;
+      var icon = currentWeatherData.list[0].weather[0].icon;
+      var iconURL=`https://openweathermap.org/img/w/${icon}.png`;
+        weatherImg.setAttribute("src", iconURL);
+
+      tempPar.textContent=currentWeatherData.list[0].main.temp;
+      windSpeed.textContent=currentWeatherData.list[0].wind.speed;
+      humidity.textContent=currentWeatherData.list[0].main.humidity;
+
+      card.append(heading, weatherImg, tempPar, windSpeed, humidity)
+      var cityName=currentWeatherData.city.name;
       console.log(cityName);
       var date=new Date();
       console.log(date);
       heading.textContent= cityName;
-      todayWeather.appendChild(heading);
+      todayWeather.appendChild(card);
       // assign the values from your geocode data to your lat and long variables that were declared up top
       // and pass those variables into your next api call.
     })
   console.log("Get Current Weather");
 }
+
+
+function fiveDayWeatherForecast(data) {
+  console.log("FiveDay", data);
+  for (var i = 0; i < data.length; i++) {
+
+    if (data[i].dt_txt.slice(11, 13) == "12") {
+      console.log("12PM DATA", data[i]);
+      // renderForecastCard(data[i]);
+    }
+  }
+
+}
+
 
 function getWeatherForecast(params) {
   console.log("Get Forecast");

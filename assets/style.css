@@ -26,3 +26,13 @@ form {
     background-color: grey;
     border: 1px solid black;
 }
+
+.card{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.card img {
+    width: 50px;
+}
