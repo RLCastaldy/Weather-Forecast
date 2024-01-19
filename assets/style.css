@@ -27,6 +27,10 @@ form {
     border: 1px solid black;
 }
 
+#tryAgain {
+    display: none;
+}
+
 .card{
     display: flex;
     flex-direction: column;
@@ -34,5 +38,55 @@ form {
 }
 
 .card img {
+    width: 50px;
+}
+
+.card2{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.card2 img {
+    width: 50px;
+}
+
+.card3{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.card3 img {
+    width: 50px;
+}
+
+.card4{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.card4 img {
+    width: 50px;
+}
+
+.card5{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.card5 img {
+    width: 50px;
+}
+
+.card6{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.card6 img {
     width: 50px;
 }
