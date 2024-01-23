@@ -1,3 +1,4 @@
+// variables for html elements
 const inputElement = document.querySelector("#search-1");
 const submitBtn = document.querySelector("#submit-search-1");
 const resultsElement = document.querySelector("section");
@@ -7,12 +8,13 @@ const todayWeather3 = document.querySelector('#result-3');
 const todayWeather4 = document.querySelector('#result-4');
 const todayWeather5 = document.querySelector('#result-5');
 const todayWeather6 = document.querySelector('#result-6');
+// emty variables to be filled by api call
 let searchCity = null;
 let lat = null;
 let lon = null;
-
+// key from api to allow access to data
 let apiKey = "81de0a25e101e669923b3eb2ce22b22e";
-
+// api call for weather data
 function getCurrentWeather(lat, lon) {
   let currentWeather = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`;
     // now let's make the fetch request
@@ -25,10 +27,10 @@ function getCurrentWeather(lat, lon) {
       // console log it again
       console.log("DATA", currentWeatherData);
 
-
+      // variables for data to apply to cards
       var card = document.createElement("div"); 
         card.setAttribute("class", "card");
-
+      // variables to create html elements for data to display
       var heading = document.createElement("h2");
       var date= document.createElement("h3");
       var weatherImg = document.createElement("img");
@@ -38,12 +40,12 @@ function getCurrentWeather(lat, lon) {
       var icon = currentWeatherData.list[0].weather[0].icon;
       var iconURL=`https://openweathermap.org/img/w/${icon}.png`;
         weatherImg.setAttribute("src", iconURL);
-
+      // applying data to display on card
       date.textContent=new Date();
       tempPar.textContent=currentWeatherData.list[0].main.temp;
       windSpeed.textContent=currentWeatherData.list[0].wind.speed;
       humidity.textContent=currentWeatherData.list[0].main.humidity;
-
+      // append data to card variables and enable them to display on page
       card.append(heading, date, weatherImg, tempPar, windSpeed, humidity)
       var cityName=currentWeatherData.city.name;
       console.log(cityName);
@@ -53,7 +55,7 @@ function getCurrentWeather(lat, lon) {
       // and pass those variables into your next api call.
       var card2 = document.createElement("div"); 
         card2.setAttribute("class", "card2");
-
+      // repeat steps for each days weather
       var heading2=document.createElement("h2");
       var date2=document.createElement("h3");
       var weatherImg2=document.createElement("img");
@@ -173,39 +175,27 @@ function getCurrentWeather(lat, lon) {
     })
   console.log("Get Current Weather");
 }
+// end of cards for displaying weather data
 
-// function fiveDayWeatherForecast(noonData) {
-//   console.log("FiveDay", noonData);
-//   for (var i = 0; i < noonData.length; i++) {
-
-//     if (noonData[i].dt_txt.slice(11, 13) == "12") {
-//       console.log("NoonDATA", noonData[i]);
-//     }).then( response => {
-//     }
-//   }
-// }
-
-
-      // assign the values from your geocode data to your lat and long variables that were declared up top
-      // and pass those variables into your next api call.
-  
-
+// calls getWeatherForecast function
 function getWeatherForecast(params) {
   console.log("Get Forecast");
 }
 
+// calls displayCurrentWeather function
 function displayCurrentWeather(params) {
     const currentWeather= getCurrentWeather()
     console.log("Current Weather", currentWeather)
 }
 
+// adds functionality to buttons
 submitBtn.addEventListener("click", (event) => {
     searchCity = inputElement.value;
     document.getElementById( 'searchElement' ).style.display = 'none';
     document.getElementById( 'tryAgain' ).style.display = 'flex';
   
 
-    
+// allows API data to be used   
 const searchQuery = searchCity;
 const searchHistory = JSON.parse(localStorage.getItem('searchHistory')) || [];
 searchHistory.push(searchQuery);
