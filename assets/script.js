@@ -211,7 +211,7 @@ localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
     // but first let's make the call to our GEcoding API to get the latitude and longitude values
     // which we are then going to pass into our onecall API endpoint
 
-    let geocodeUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${searchCity}&appid=${apiKey}`;
+    let geocodeUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${searchCity}&appid=${apiKey}`;
     // now let's make the fetch request
     fetch(geocodeUrl).then( response => {
       // let's just console .log it for now
