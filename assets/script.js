@@ -195,7 +195,7 @@ submitBtn.addEventListener("click", (event) => {
     document.getElementById( 'tryAgain' ).style.display = 'flex';
   
 
-// allows API data to be used   
+// makes API data into usable format 
 const searchQuery = searchCity;
 const searchHistory = JSON.parse(localStorage.getItem('searchHistory')) || [];
 searchHistory.push(searchQuery);
